@@ -963,7 +963,6 @@ blockquote {
 
 .grid-footer {
   width: 100%;
-  grid-row-gap: 48px;
   grid-template-rows: auto auto;
   grid-template-columns: 1fr;
 }
@@ -977,6 +976,7 @@ blockquote {
   align-items: center;
   transition: all .3s ease-out, border-width .3s ease-in;
   display: flex;
+  background-color: white;
 }
 
 .social-link:hover {
