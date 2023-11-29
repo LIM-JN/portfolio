@@ -2105,3 +2105,8 @@ blockquote {
 }
 
 
+.custom-img {
+  width:320px;
+  display: block;
+  margin-right: 2.25em;
+}
