@@ -796,7 +796,7 @@ blockquote {
 
 .project-image-base {
   width: 100%;
-  max-width: 460px;
+  max-width: 660px;
 }
 
 .button-arrow {
@@ -1054,7 +1054,7 @@ blockquote {
 
 .section-footer {
   background-color: var(--gray-900);
-  padding: 66px 5%;
+  padding: 25px 5% 45px;
   position: relative;
 }
 
