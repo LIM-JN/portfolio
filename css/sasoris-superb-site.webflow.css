@@ -2110,3 +2110,21 @@ blockquote {
   display: block;
   margin-right: 2.25em;
 }
+
+.linkh2 {
+  text-decoration: none!important;
+  transition:0.3s;
+}
+
+.linkh2:hover {
+  color:#e94d35
+}
+.project-p {
+  font-size: 18px;
+  margin-top:24px ;
+  padding-bottom:20px;
+}
+
+.nope {
+  display: none;
+}
