@@ -809,7 +809,7 @@ blockquote {
 
 .project-link {
   color: var(--gray-900);
-  margin-top: 48px;
+  margin-top: 30px;
   font-size: 20px;
   font-weight: 600;
   line-height: 32px;
@@ -2120,11 +2120,23 @@ blockquote {
   color:#e94d35
 }
 .project-p {
-  font-size: 18px;
+  font-size: 20px;
+  line-height: 1.2;
   margin-top:24px ;
-  padding-bottom:20px;
+  padding-bottom:6px;
 }
 
 .nope {
   display: none;
+}
+.project-link {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.project-link:hover {
+  text-decoration: underline;
+}
+.project-link:first-child {
+  margin-right: 30px;
 }
