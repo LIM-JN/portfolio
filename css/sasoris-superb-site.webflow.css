@@ -1614,8 +1614,7 @@ blockquote {
 }
 
 .button-submit:hover {
-  color: #131416;
-  background-color: #f8f9fa;
+  background-color: #131416;
   text-decoration: underline;
 }
 
@@ -1695,7 +1694,7 @@ blockquote {
 }
 
 .section-contact {
-  background-color: var(--white);
+  background-color: var(--gray-100);
   padding: 60px 5% 100px;
   position: relative;
   overflow: hidden;
