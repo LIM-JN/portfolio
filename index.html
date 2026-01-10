@@ -545,24 +545,24 @@
         <p class="paragraph-large align---centered" >If you came from upwork use upwork direct message instead submit this form</p>
       </div>
       <div class="form-block w-form">
-      <form id="email-form" method="post" action="https://script.google.com/macros/s/AKfycbx6A-jraATLb3iUd6OsVTUSJuulIMG50tnC7tR1oz3UGupUYVaWvrFGL0352yg2922e/exec" class="form">
-        <label for="Name-Form" class="field-label">Name <span class="text-span">*</span></label>
-        <input type="text" name="name" id="Name-Form" required class="text-field-white w-input">
+        <form id="email-form" method="post" action="https://script.google.com/macros/s/AKfycbx6A-jraATLb3iUd6OsVTUSJuulIMG50tnC7tR1oz3UGupUYVaWvrFGL0352yg2922e/exec" class="form">
+          <label for="Name-Form" class="field-label">Name <span class="text-span">*</span></label>
+          <input type="text" name="name" id="Name-Form" required class="text-field-white w-input">
 
-        <label for="Subject-Form" class="field-label">Subject <span class="text-span">*</span></label>
-        <input type="text" name="subject" id="Subject-Form" required class="text-field-white w-input">
+          <label for="Subject-Form" class="field-label">Subject <span class="text-span">*</span></label>
+          <input type="text" name="subject" id="Subject-Form" required class="text-field-white w-input">
 
-        <label for="Email-Form" class="field-label">Work Mail <span class="text-span">*</span></label>
-        <input type="email" name="email" id="Email-Form" required class="text-field-white w-input">
+          <label for="Email-Form" class="field-label">Work Mail <span class="text-span">*</span></label>
+          <input type="email" name="email" id="Email-Form" required class="text-field-white w-input">
 
-        <label for="Message-Form" class="field-label">Message <span class="text-span">*</span></label>
-        <textarea name="message" id="Message-Form" required class="text-field-white w-input"></textarea>
+          <label for="Message-Form" class="field-label">Message <span class="text-span">*</span></label>
+          <textarea name="message" id="Message-Form" required class="text-field-white w-input"></textarea>
 
-        <div class="form-container">
-          <button class="button-submit w-inline-block" type="submit">Submit Now</button>
-        </div>
-      </form>
-      <div id="form-status"></div>
+          <div class="form-container">
+            <button class="button-submit w-inline-block" type="submit">Submit Now</button>
+          </div>
+        </form>
+        <div id="form-status"></div>
         <div class="success-message w-form-done">
           <div>Thank you! Your submission has been received!</div>
         </div>
@@ -600,16 +600,23 @@
       </div>
     </div>
   </div>
-  <script>
+<script>
   const form = document.getElementById('email-form');
   const statusEl = document.getElementById('form-status');
+  const submitBtn = form.querySelector('button[type="submit"]');
 
   form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // ✅ 페이지 이동 막기
 
+    // UI 상태
     statusEl.textContent = '전송 중...';
+    submitBtn.disabled = true;
 
+    // 폼데이터 만들기
     const formData = new FormData(form);
+
+    // (선택) userAgent 같이 보내고 싶으면
+    formData.append('userAgent', navigator.userAgent);
 
     try {
       const res = await fetch(form.action, {
@@ -617,15 +624,21 @@
         body: formData,
       });
 
-      const text = await res.text();
-      if (text.trim() === 'OK') {
-        statusEl.textContent = '전송 완료!';
+      const text = (await res.text()).trim();
+
+      if (res.ok && text === 'OK') {
+        statusEl.textContent = '전송 완료! 감사합니다 :)';
         form.reset();
       } else {
-        statusEl.textContent = '전송 실패. 잠시 후 다시 시도해 주세요.';
+        // 서버에서 ERROR 등을 보냈거나, 예상과 다른 응답
+        statusEl.textContent = '전송에 실패했어요. 잠시 후 다시 시도해주세요.';
+        console.warn('Form submit response:', res.status, text);
       }
     } catch (err) {
-      statusEl.textContent = '네트워크 오류가 발생했습니다.';
+      statusEl.textContent = '네트워크 오류가 발생했어요. 연결 상태를 확인해주세요.';
+      console.error(err);
+    } finally {
+      submitBtn.disabled = false;
     }
   });
 </script>
